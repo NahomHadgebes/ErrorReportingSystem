@@ -1,0 +1,6 @@
+@ErrorReportingSystem.Api_HostAddress = http://localhost:5269
+
+GET {{ErrorReportingSystem.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
