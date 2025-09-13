@@ -86,6 +86,17 @@ public class Program
         Console.WriteLine($"[DEBUG] ENV: {builder.Environment.EnvironmentName}");
         Console.WriteLine($"[DEBUG] DefaultConnection: {conn}");
 
+        // ... före builder.Build()
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("AllowFrontend", policy =>
+            {
+                policy.WithOrigins("http://localhost:3000")
+                      .AllowAnyHeader()
+                      .AllowAnyMethod();
+            });
+        });
+
         var app = builder.Build();
 
         // ---- Pipeline ----
@@ -97,7 +108,9 @@ public class Program
 
         app.UseHttpsRedirection();
 
-        app.UseAuthentication();   // <— viktigt: före Authorization
+        app.UseCors("AllowFrontend");
+
+        app.UseAuthentication();
         app.UseAuthorization();
 
         app.MapControllers();
