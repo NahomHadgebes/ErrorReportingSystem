@@ -13,5 +13,5 @@ jobs:
       - name: Send message to Discord
         run: |
           curl -H "Content-Type: application/json" \
-               -d "{\"content\": \"🚀 Ny kod pushad till *"ErrorReportingSystem"*!\"}" \ by Nahom
+               -d "{\"content\": \"🚀 Ny kod pushad till *"ErrorReportingSystem"*!\"}" \
                ${{ secrets.ERRORREPORTINGSYSTEM_DEV }}
